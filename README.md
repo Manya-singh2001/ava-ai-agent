@@ -101,6 +101,46 @@ Includes a **custom tool router** for intelligent decision-making.
 - Ensures efficient LLM usage
 
 ---
+
+## 🏗️ System Architecture
+
+### 🔁 High-Level Flow
+
+```mermaid
+flowchart TD
+    A[User Input] --> B[Router Node]
+
+    B -->|Conversation| C[Chat Node]
+    B -->|Image| D[Image Node]
+    B -->|Audio| E[Audio Node]
+    B -->|Tool| F[Tool Node]
+
+    C --> G[Memory Update]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H[Streaming Response]
+```
+
+---
+
+### 🧩 LangGraph Structure
+
+<p align="center">
+  <img src="https://github.com/Manya-singh2001/ava-ai-agent/blob/main/images/Langraph-pipeline.png"/>
+</p>
+
+---
+
+### 🧠 Memory Pipeline
+
+<p align="center">
+  <img src="https://github.com/Manya-singh2001/ava-ai-agent/blob/main/images/memory-pipeline.png"/>
+</p>
+
+---
+
 ## ⚙️ Tech Stack
 
 ### 🧠 AI / Backend
@@ -125,22 +165,57 @@ Includes a **custom tool router** for intelligent decision-making.
   
 ---
 
-## 🏗️ System Architecture
+### 🚀 Deployment Architecture
 
-### 🔁 High-Level Flow
+<p align="center">
+  <img src="https://github.com/Manya-singh2001/ava-ai-agent/blob/main/images/deployment-architecture.png"/>
+</p>
 
-```mermaid
-flowchart TD
-    A[User Input] --> B[Router Node]
+---
 
-    B -->|Conversation| C[Chat Node]
-    B -->|Image| D[Image Node]
-    B -->|Audio| E[Audio Node]
-    B -->|Tool| F[Tool Node]
+### 🧪 Example Queries
+- "My name is Manya"
+- "What do you know about me?"
+- "Show me a cyberpunk city"
+- "What's the weather in Delhi?"
+- "Who is Elon Musk?"
 
-    C --> G[Memory Update]
-    D --> G
-    E --> G
-    F --> G
+---
 
-    G --> H[Streaming Response]
+### 🔥 Why This Project Stands Out
+- Uses graph-based orchestration (LangGraph) instead of linear pipelines
+- Implements memory-aware AI behavior
+- Combines multi-modal + tools + memory in one system
+- Designed with scalability and real-world usage in mind
+
+This is closer to a production AI assistant system than a typical chatbot project.
+
+---
+
+### 📌 Future Improvements
+- 🔐 Authentication system
+- 📅 Calendar + scheduling tools
+- 🧠 Advanced memory ranking (semantic + recency)
+- 📱 React frontend (production UI)
+- 🤖 Autonomous agent workflows
+
+---
+
+## 👨‍💻 Author
+
+**Manya Singh**
+
+---
+
+## ⭐ Final Note
+
+This project demonstrates:
+
+- End-to-end AI system design
+- Real-world agent architecture
+- Memory + reasoning integration
+- Multi-modal AI capabilities
+
+---
+
+<p align="center"> <b>If you found this interesting, feel free to star ⭐ the repo</b> </p> ```
