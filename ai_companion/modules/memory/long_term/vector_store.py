@@ -3,11 +3,16 @@ from qdrant_client.models import Distance, VectorParams, PointStruct
 from sentence_transformers import SentenceTransformer
 import uuid
 import time
+import os 
+from qdrant_client import QdrantClient
 
 
 class QdrantVectorStore:
     def __init__(self):
-        self.client = QdrantClient("localhost", port=6333)
+        self.client = QdrantClient(
+            url=os.getenv("QDRANT_URL"),
+            api_key=os.getenv("QDRANT_API_KEY")
+        )
         self.collection_name = "memory"
 
         self.embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
