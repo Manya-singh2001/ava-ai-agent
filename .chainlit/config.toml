@@ -1,7 +1,0 @@
-[UI]
-name = "Ava AI"
-description = "Your intelligent AI companion"
-default_collapse_content = false
-
-[features]
-multi_modal = true
