@@ -1,0 +1,71 @@
+/* 🌌 Background */
+body {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    font-family: "Inter", sans-serif;
+}
+
+/* 💬 Chat container */
+.cl-chat {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+}
+
+/* 💎 Message bubbles */
+.cl-message {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 12px;
+    margin: 8px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover animation */
+.cl-message:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 🤖 AI messages */
+.cl-message[data-author="Ava"] {
+    border-left: 3px solid #6366f1;
+}
+
+/* 🧑 User messages */
+.cl-message[data-author="You"] {
+    border-left: 3px solid #22c55e;
+}
+
+/* ✍️ Input box */
+.cl-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(10px);
+}
+
+/* 🚀 Send button */
+button {
+    border-radius: 10px !important;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* ✨ Typing animation feel */
+.cl-message p {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

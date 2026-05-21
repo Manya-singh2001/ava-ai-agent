@@ -1,0 +1,8 @@
+[project]
+name = "Ava AI"
+
+[UI]
+custom_css = "public/custom.css"
+
+[features]
+unsafe_allow_html = true

@@ -2,14 +2,10 @@ import chainlit as cl
 from langchain_core.messages import HumanMessage
 from ai_companion.graph.graph import create_graph
 import re
-import os 
-
-PORT = int(os.environ.get("PORT", 8000))
 
 graph = create_graph()
 
 
-# 🚀 CHAT START (WELCOME SCREEN)
 @cl.on_chat_start
 async def start():
     user_id = cl.user_session.get("id")
@@ -19,33 +15,44 @@ async def start():
         cl.user_session.set("id", user_id)
 
     await cl.Message(
-        content="""
-Hey, I'm **Ava** 👋  
+    content="""
+# 👋 Welcome to Ava
 
-I'm your AI companion - I can create images, speak, an remember things about you.
+### Your Personal AI Companion
 
-What's on your mind today ?
+✨ Remembers you  
+🎨 Creates images  
+🧠 Thinks step-by-step  
+
+---
+
+**Try:**
+- "Create an image of a cyberpunk city"
+- "Remember that I like coffee"
+- "Explain transformers simply"
+
+---
+
+💬 *What’s on your mind?*
 """,
-        author="Ava",
-        avatar="https://cdn-icons-png.flaticon.com/512/4712/4712027.png"
-    ).send()
+    author="Ava"
+).send()
 
 
-# 💬 MAIN CHAT
 @cl.on_message
 async def main(message: cl.Message):
     user_id = cl.user_session.get("id")
 
     msg = cl.Message(
         content="",
-        author="Ava",
-        avatar="public/avatar.png")
+        author="Ava"
+    )
     await msg.send()
 
     full_response = ""
 
-    # 🧠 Thinking indicator
-    async with cl.Step(name="Ava is thinking...", show_input=False):
+    # Thinking indicator
+    with cl.Step(name="Ava is thinking...", show_input=False):
 
         async for chunk in graph.astream({
             "messages": [HumanMessage(content=message.content)],
@@ -59,22 +66,19 @@ async def main(message: cl.Message):
                     await msg.stream_token(last_msg.content)
                     await cl.sleep(0.01)
 
-    # Final update
     msg.content = full_response
     await msg.update()
 
-    # 🖼️ IMAGE HANDLING
+    # Image handling
     image_match = re.search(r"(https://image\.pollinations\.ai[^\s]+)", full_response)
 
     if image_match:
-        image_url = image_match.group(1)
-
         await cl.Image(
-            url=image_url,
+            url=image_match.group(1),
             name="Ava's creation"
         ).send()
 
-    # 🔊 AUDIO HANDLING
+    # Audio handling
     if full_response.strip().endswith(".mp3"):
         await cl.Audio(
             path=full_response.strip(),
