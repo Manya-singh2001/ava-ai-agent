@@ -2,6 +2,9 @@ import chainlit as cl
 from langchain_core.messages import HumanMessage
 from ai_companion.graph.graph import create_graph
 import re
+import os 
+
+PORT = int(os.environ.get("PORT", 8000))
 
 graph = create_graph()
 
@@ -24,7 +27,7 @@ I'm your AI companion - I can create images, speak, an remember things about you
 What's on your mind today ?
 """,
         author="Ava",
-        avatar="public/avatar.png"
+        avatar="https://cdn-icons-png.flaticon.com/512/4712/4712027.png"
     ).send()
 
 
@@ -42,7 +45,7 @@ async def main(message: cl.Message):
     full_response = ""
 
     # 🧠 Thinking indicator
-    with cl.Step(name="Ava is thinking...", show_input=False):
+    async with cl.Step(name="Ava is thinking...", show_input=False):
 
         async for chunk in graph.astream({
             "messages": [HumanMessage(content=message.content)],
