@@ -1,8 +1,7 @@
 [UI]
 name = "Ava AI"
 description = "Your intelligent AI companion"
-default_theme = "dark"
-custom_css = "custom.css
+default_collapse_content = false
 
 [features]
 multi_modal = true
